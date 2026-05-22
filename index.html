@@ -203,6 +203,13 @@ h2 {
   border-radius: 12px; display: flex; align-items: center; justify-content: center;
   color: #fff; font-family: 'Noto Serif SC', serif; font-size: 1.1rem; font-weight: 600;
 }
+.ind-card .logo-img {
+  width: auto; height: 52px; max-width: 140px; flex-shrink: 0;
+  object-fit: contain; border-radius: 4px;
+}
+.ind-card .logo-dark {
+  background: #f5f2ed; padding: 0.6rem 0.8rem; border-radius: 8px;
+}
 .ind-card h3 { font-family: 'Noto Serif SC', serif; font-size: 1.05rem; margin-bottom: 0.3rem; }
 .ind-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 .ind-card .tag {
@@ -353,7 +360,8 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
 
 <div class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-tag">GBA University · Photothermal Metamaterials</div>
+    <img src="img/gbu-college.png" alt="大湾区大学物质科学学院" style="height:38px;opacity:0.7;margin-bottom:1.2rem;">
+    <div class="hero-tag">Photothermal Metamaterials</div>
     <h1>汪万林 <span>Wanlin Wang</span></h1>
     <div class="sub">
       光热超材料与仿生辐射致冷技术。从蝴蝶翅膀中汲取灵感，用微纳结构调控光与热。
@@ -604,7 +612,7 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
     <h2>产业转化</h2>
 
     <div class="ind-card">
-      <div class="logo-placeholder">安</div>
+      <img class="logo-img" src="img/anjielun.png" alt="安捷伦" style="height:48px;">
       <div>
         <h3>广东安捷伦新材料科技有限公司</h3>
         <p>签订 <strong>150 万元</strong>技术开发合同，共建校企联合实验室。安捷伦为比亚迪、特斯拉、蔚来、小鹏、吉利等整车厂 Tier-1 供应商，已出具采购意向书与市场渠道承诺函。</p>
@@ -613,7 +621,7 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
     </div>
 
     <div class="ind-card">
-      <div class="logo-placeholder">爱</div>
+      <img class="logo-img" src="img/aijia.jpg" alt="爱加真空" style="height:50px;">
       <div>
         <h3>东莞爱加真空科技有限公司</h3>
         <p>签订电子束蒸发镀膜机租赁合同，用于多功能光学薄膜制备及粉体前驱体中试生产。设备极限真空 ≤5×10⁻⁴ Pa，最大镀膜幅宽 1.3m。</p>
@@ -622,7 +630,7 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
     </div>
 
     <div class="ind-card">
-      <div class="logo-placeholder" style="background:linear-gradient(135deg,var(--wing-gold),#a0682a);">光</div>
+      <div class="logo-dark"><img class="logo-img" src="img/1.png" alt="光冷科技" style="height:44px;"></div>
       <div>
         <h3>东莞市光冷科技有限公司</h3>
         <p>自创企业，聚焦「AI 智冷炫彩功能粉体」的产业化。以高校研发 + 企业联合验证 + 代工生产的轻资产模式，推动辐射致冷涂料在新能源汽车领域的规模化应用。</p>
@@ -722,6 +730,10 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
 </section>
 
 <footer>
+  <div style="margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <img src="img/gbu-college.png" alt="大湾区大学" style="height:34px;opacity:0.6;">
+    <img src="img/lab-h.png" alt="东莞市光热辐射物理与技术重点实验室" style="height:30px;opacity:0.6;">
+  </div>
   <p>Wang Wanlin · wangwanlin@gbu.edu.cn</p>
   <p>大湾区大学物质科学学院 · 东莞市光热辐射物理与技术重点实验室</p>
   <p><a href="https://www.gbu.edu.cn/detail/article/597" target="_blank" rel="noopener" style="color:var(--wing-blue);text-decoration:none;">GBU 教师主页</a> · <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener" style="color:var(--wing-blue);text-decoration:none;">Google Scholar</a></p>
