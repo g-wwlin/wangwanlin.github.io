@@ -72,7 +72,8 @@ body {
               radial-gradient(ellipse at 40% 70%, rgba(196,130,62,0.03) 0%, transparent 45%);
   pointer-events: none;
 }
-.hero-inner { position: relative; z-index: 1; max-width: 800px; }
+.hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 0.9fr; gap: 3rem; align-items: center; max-width: 1060px; }
+.hero-text { max-width: 600px; }
 .hero-tag {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
@@ -125,6 +126,41 @@ body {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ---- Hero Visual (abstract optical art) ---- */
+.hero-visual { display: flex; justify-content: center; }
+.abstract-art {
+  width: 100%; max-width: 400px; aspect-ratio: 4/5;
+  border-radius: 20px; position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.5); border: 1px solid rgba(232,230,224,0.6);
+  box-shadow: 0 20px 50px rgba(10,92,138,0.04);
+}
+/* rotating light caustics */
+.abstract-art::before {
+  content: ''; position: absolute; inset: 0;
+  background: conic-gradient(from 180deg at 55% 60%, rgba(10,92,138,0.18), rgba(22,135,140,0.12), rgba(196,130,62,0.08), rgba(10,92,138,0.05), transparent 50%);
+  filter: blur(48px); animation: drift 18s linear infinite;
+}
+/* dot-matrix grain — references butterfly wing scales */
+.abstract-art::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 30%, rgba(10,92,138,0.04) 1px, transparent 1px),
+                    radial-gradient(circle at 60% 70%, rgba(22,135,140,0.03) 1.5px, transparent 1.5px),
+                    radial-gradient(circle at 40% 50%, rgba(196,130,62,0.03) 1px, transparent 1px);
+  background-size: 28px 28px, 42px 42px, 36px 36px;
+  opacity: 0.6;
+}
+/* thin-film interference bands */
+.art-bands { position: absolute; inset: 0; z-index: 1;
+  background: repeating-linear-gradient(160deg, transparent, transparent 18px, rgba(10,92,138,0.025) 18px, rgba(10,92,138,0.025) 20px);
+  mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.5), transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.5), transparent 70%);
+}
+.art-caption { position: absolute; bottom: 1.2rem; left: 0; right: 0; z-index: 2;
+  text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+  color: var(--muted); letter-spacing: 0.08em; opacity: 0.6;
+}
+@keyframes drift { 100% { transform: rotate(360deg); } }
 
 /* ---- Sections ---- */
 section { padding: var(--gap); }
@@ -335,7 +371,10 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
 .btn-light:hover { transform: translateY(-2px); background: #b07030; }
 
 /* ---- Responsive ---- */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-visual { display: none; }
+  .hero-text { max-width: 100%; }
   .nav-links { gap: 0.6rem; }
   .nav-links a { font-size: 0.72rem; }
   .hero .dual-role { flex-direction: column; gap: 0.5rem; }
@@ -360,17 +399,24 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
 
 <div class="hero" id="home">
   <div class="hero-inner">
-    <img src="img/gbu-college.png" alt="大湾区大学物质科学学院" style="height:38px;opacity:0.7;margin-bottom:1.2rem;">
-    <div class="hero-tag">Photothermal Metamaterials</div>
-    <h1>汪万林 <span>Wanlin Wang</span></h1>
-    <div class="sub">
-      光热超材料与仿生辐射致冷技术。从蝴蝶翅膀中汲取灵感，用微纳结构调控光与热。
+    <div class="hero-text">
+      <div class="hero-tag">Photothermal Metamaterials</div>
+      <h1>汪万林 <span>Wanlin Wang</span></h1>
+      <div class="sub">
+        光热超材料与仿生辐射致冷技术。从蝴蝶翅膀中汲取灵感，用微纳结构调控光与热。
+      </div>
+      <div class="en">Photothermal metamaterials &amp; bio-inspired radiative cooling</div>
+      <div class="dual-role">
+        <span><strong>大湾区大学</strong> 副教授 · 博导 · 微电子中心执行副主任</span>
+        <span><strong>光冷科技</strong> 创始人</span>
+        <span>东莞市特色人才 · 深圳市高层次后备级人才</span>
+      </div>
     </div>
-    <div class="en">Photothermal metamaterials &amp; bio-inspired radiative cooling</div>
-    <div class="dual-role">
-      <span><strong>大湾区大学</strong> 副教授 · 博导 · 微电子中心执行副主任</span>
-      <span><strong>光冷科技</strong> 创始人</span>
-      <span>东莞市特色人才 · 深圳市高层次后备级人才</span>
+    <div class="hero-visual">
+      <div class="abstract-art">
+        <div class="art-bands"></div>
+        <div class="art-caption">Structural Color · Metamaterials</div>
+      </div>
     </div>
   </div>
 </div>
@@ -722,7 +768,7 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
   <div class="section-inner reveal">
     <div class="join-box">
       <h2>加入课题组</h2>
-      <p>课题组处于快速成长期，经费充足（国自然面上 + 150 万横向 + 省重点实验室），产业转化前景广阔。导师亲自指导实验规划与论文写作，确保每位学生得到充分关注。</p>
+      <p>课题组处于快速成长期，产业转化前景广阔。导师亲自指导实验规划与论文写作，确保每位学生得到充分关注。</p>
       <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);">常年招收具有 <strong>物理、材料、光学工程、高分子、微纳加工</strong> 背景的博士后、博士生及硕士生。</p>
       <a href="mailto:wangwanlin@gbu.edu.cn" class="btn-light">投递简历至 wangwanlin@gbu.edu.cn</a>
     </div>
@@ -731,7 +777,6 @@ footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margi
 
 <footer>
   <div style="margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
-    <img src="img/gbu-college.png" alt="大湾区大学" style="height:34px;opacity:0.6;">
     <img src="img/lab-h.png" alt="东莞市光热辐射物理与技术重点实验室" style="height:30px;opacity:0.6;">
   </div>
   <p>Wang Wanlin · wangwanlin@gbu.edu.cn</p>
