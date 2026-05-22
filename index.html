@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wang Wanlin Lab · 汪万林课题组</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --wing-blue: #0A5C8A;
+  --wing-teal: #16878C;
+  --wing-gold: #C4823E;
+  --wing-deep: #052D45;
+  --ink: #1a1a1a;
+  --fog: #f7f6f3;
+  --card: #ffffff;
+  --rule: #e8e6e0;
+  --muted: #8c8a84;
+  --radius: 6px;
+  --gap: clamp(2rem, 5vw, 4rem);
+  --nav-height: 60px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--fog);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  padding-top: var(--nav-height);
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-height);
+  background: rgba(247, 246, 243, 0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  z-index: 1000; border-bottom: 1px solid rgba(232, 230, 224, 0.5);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--gap);
+}
+.nav-brand { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 1rem; color: var(--wing-deep); text-decoration: none; letter-spacing: -0.02em; }
+.nav-links { display: flex; gap: 1.2rem; align-items: center; }
+.nav-links a { color: var(--ink); text-decoration: none; font-size: 0.82rem; font-weight: 400; transition: color 0.2s; }
+.nav-links a:hover { color: var(--wing-blue); }
+.nav-join { background: var(--wing-blue); color: #fff !important; padding: 0.3rem 0.7rem; border-radius: 4px; font-weight: 500 !important; font-size: 0.78rem !important; }
+.nav-join:hover { background: var(--wing-deep) !important; }
+
+/* ---- Hero ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gap);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(170deg, #f7f6f3 0%, #edf4f7 40%, #f2efeb 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20vh; right: -15vw;
+  width: 70vw; height: 70vw;
+  background: radial-gradient(ellipse at 30% 40%, rgba(10,92,138,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 55% 55%, rgba(22,135,140,0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 40% 70%, rgba(196,130,62,0.03) 0%, transparent 45%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 800px; }
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--wing-blue);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--wing-deep);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s forwards;
+}
+.hero h1 span { color: var(--wing-blue); }
+.hero .sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-top: 1.2rem;
+  max-width: 540px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero .en {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.55s forwards;
+}
+.hero .dual-role {
+  display: flex; gap: 2rem; margin-top: 2rem;
+  opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+}
+.dual-role span {
+  font-size: 0.85rem; color: var(--muted);
+  padding: 0.3rem 0; border-bottom: 1px solid var(--rule);
+}
+.dual-role span strong { color: var(--ink); font-weight: 500; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Sections ---- */
+section { padding: var(--gap); }
+.section-inner { max-width: 900px; margin: 0 auto; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  color: var(--wing-blue); text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 600; color: var(--wing-deep);
+  margin-bottom: 2rem; line-height: 1.3;
+}
+
+/* ---- News ---- */
+.news-list { border-left: 2px solid var(--rule); padding-left: 1.5rem; margin-left: 0.5rem; }
+.news-item { position: relative; margin-bottom: 1.2rem; }
+.news-item::before { content: ''; position: absolute; left: -1.85rem; top: 0.4rem; width: 10px; height: 10px; background: var(--wing-blue); border: 3px solid var(--fog); border-radius: 50%; box-shadow: 0 0 0 1px var(--rule); }
+.news-date { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--wing-gold); margin-bottom: 0.15rem; font-weight: 500; }
+.news-text { font-size: 0.88rem; color: var(--ink); line-height: 1.6; }
+.news-text strong { font-weight: 500; }
+
+/* ---- Research Cards ---- */
+.research-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+.r-card {
+  background: var(--card);
+  padding: 1.6rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: default;
+}
+.r-card:hover {
+  box-shadow: 0 4px 24px rgba(10,92,138,0.08);
+  transform: translateY(-2px);
+}
+.r-card h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.5rem;
+}
+.r-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+/* ---- Achievements ---- */
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; }
+.ach-card {
+  background: var(--card); padding: 1.5rem 1.6rem;
+  border-radius: var(--radius); border: 1px solid var(--rule);
+  text-align: center; transition: box-shadow 0.3s;
+}
+.ach-card:hover { box-shadow: 0 4px 24px rgba(10,92,138,0.08); }
+.ach-num {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 2.4rem; font-weight: 700; color: var(--wing-blue);
+  line-height: 1; margin-bottom: 0.4rem;
+}
+.ach-num .unit { font-size: 1rem; font-weight: 400; color: var(--muted); margin-left: 0.15em; }
+.ach-label { font-size: 0.82rem; color: var(--muted); }
+
+/* ---- Industry ---- */
+.ind-card {
+  background: var(--card); padding: 2rem;
+  border-radius: var(--radius); border: 1px solid var(--rule);
+  margin-bottom: 1rem;
+  display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;
+}
+.ind-card .logo-placeholder {
+  width: 64px; height: 64px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--wing-blue), var(--wing-teal));
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-family: 'Noto Serif SC', serif; font-size: 1.1rem; font-weight: 600;
+}
+.ind-card h3 { font-family: 'Noto Serif SC', serif; font-size: 1.05rem; margin-bottom: 0.3rem; }
+.ind-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+.ind-card .tag {
+  display: inline-block; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace;
+  padding: 0.2em 0.6em; border-radius: 3px;
+  background: #f0f7fa; color: var(--wing-blue);
+  margin-right: 0.4rem; margin-bottom: 0.3rem;
+}
+
+/* ---- Students ---- */
+.student-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.student-table th {
+  text-align: left; padding: 0.8rem 0.6rem;
+  font-weight: 500; color: var(--muted); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--rule);
+}
+.student-table td {
+  padding: 0.7rem 0.6rem; border-bottom: 1px solid #f0eee9;
+}
+.student-table tr { transition: background 0.2s; }
+.student-table tbody tr:hover { background: #faf9f6; }
+
+/* ---- Footer ---- */
+footer {
+  text-align: center; padding: 3rem var(--gap);
+  color: var(--muted); font-size: 0.75rem;
+}
+footer .en { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; margin-top: 0.5rem; }
+
+/* ---- Scroll Reveal ---- */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ---- Structure Color Accent Line ---- */
+.accent-line {
+  width: 40px; height: 3px;
+  background: linear-gradient(90deg, var(--wing-blue), var(--wing-teal), var(--wing-gold));
+  margin-bottom: 1.5rem; border-radius: 2px;
+}
+
+/* ---- Projects ---- */
+.proj-card {
+  background: var(--card); padding: 1.5rem 2rem;
+  border-radius: var(--radius); border: 1px solid var(--rule);
+  margin-bottom: 0.7rem; transition: box-shadow 0.3s;
+}
+.proj-card:hover { box-shadow: 0 4px 24px rgba(10,92,138,0.08); }
+.proj-header {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; align-items: baseline;
+  margin-bottom: 0.35rem;
+}
+.proj-type {
+  font-size: 0.68rem; font-family: 'JetBrains Mono', monospace;
+  padding: 0.12em 0.5em; border-radius: 3px;
+  background: #edf4f7; color: var(--wing-blue);
+  white-space: nowrap;
+}
+.proj-card h3 { font-size: 0.92rem; font-weight: 500; color: var(--ink); }
+.proj-meta { font-size: 0.78rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; }
+
+/* ---- Publications ---- */
+.pub-list { list-style: none; }
+.pub-item {
+  padding: 0.7rem 0; border-bottom: 1px solid #f0eee9;
+  font-size: 0.84rem; line-height: 1.65;
+}
+.pub-item:last-child { border-bottom: none; }
+.pub-item .idx {
+  display: inline-block; width: 1.8rem; color: var(--muted);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+  vertical-align: super;
+}
+.pub-item .title { font-weight: 500; color: var(--ink); }
+.pub-item .journal { color: var(--muted); }
+.pub-item .pub-tag {
+  display: inline-block; font-size: 0.62rem; font-family: 'JetBrains Mono', monospace;
+  padding: 0.1em 0.4em; border-radius: 2px;
+  background: #fef9f0; color: var(--wing-gold);
+  margin-left: 0.4em; vertical-align: middle;
+}
+.pub-more {
+  margin-top: 0.8rem; font-size: 0.8rem; color: var(--muted);
+  text-align: center;
+}
+
+/* ---- Team Member Cards ---- */
+.member-card {
+  background: var(--card); padding: 1.5rem 2rem;
+  border-radius: var(--radius); border: 1px solid var(--rule);
+  margin-bottom: 0.8rem; transition: box-shadow 0.3s;
+  display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; align-items: flex-start;
+}
+.member-card:hover { box-shadow: 0 4px 24px rgba(10,92,138,0.08); }
+.member-card .mem-avatar {
+  width: 52px; height: 52px; flex-shrink: 0;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-family: 'Noto Serif SC', serif; font-size: 1rem; font-weight: 600;
+}
+.member-card .mem-body { flex: 1; min-width: 240px; }
+.member-card .mem-name { font-family: 'Noto Serif SC', serif; font-size: 1rem; font-weight: 600; color: var(--ink); }
+.member-card .mem-role { font-size: 0.78rem; color: var(--wing-blue); margin-bottom: 0.5rem; }
+.member-card .mem-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+.member-card .mem-tag {
+  display: inline-block; font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;
+  padding: 0.1em 0.5em; border-radius: 2px;
+  background: #f0f7fa; color: var(--wing-blue);
+  margin-right: 0.3rem; margin-top: 0.4rem;
+}
+
+/* ---- Join Us ---- */
+.join-box {
+  background: linear-gradient(135deg, var(--wing-deep), #0a3d5e);
+  padding: 3rem 2rem; border-radius: var(--radius); text-align: center; color: #fff;
+  box-shadow: 0 8px 30px rgba(5,45,69,0.12);
+}
+.join-box h2 { color: #fff; margin-bottom: 0.8rem; }
+.join-box p { color: rgba(255,255,255,0.88); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.2rem; line-height: 1.7; }
+.btn-light { display: inline-block; background: var(--wing-gold); color: #fff; padding: 0.65rem 1.6rem; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: transform 0.2s, background 0.2s; }
+.btn-light:hover { transform: translateY(-2px); background: #b07030; }
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .nav-links { gap: 0.6rem; }
+  .nav-links a { font-size: 0.72rem; }
+  .hero .dual-role { flex-direction: column; gap: 0.5rem; }
+  .ind-card { flex-direction: column; }
+  .member-card { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-brand">WL Wang Lab</a>
+  <div class="nav-links">
+    <a href="#news">动态</a>
+    <a href="#research">研究</a>
+    <a href="#publications">论著</a>
+    <a href="#industry">产业</a>
+    <a href="#team">团队</a>
+    <a href="#join" class="nav-join">加入我们</a>
+  </div>
+</nav>
+
+<div class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-tag">GBA University · Photothermal Metamaterials</div>
+    <h1>汪万林 <span>Wanlin Wang</span></h1>
+    <div class="sub">
+      光热超材料与仿生辐射致冷技术。从蝴蝶翅膀中汲取灵感，用微纳结构调控光与热。
+    </div>
+    <div class="en">Photothermal metamaterials &amp; bio-inspired radiative cooling</div>
+    <div class="dual-role">
+      <span><strong>大湾区大学</strong> 副教授 · 博导 · 微电子中心执行副主任</span>
+      <span><strong>光冷科技</strong> 创始人</span>
+      <span>东莞市特色人才 · 深圳市高层次后备级人才</span>
+    </div>
+  </div>
+</div>
+
+<section id="news">
+  <div class="section-inner reveal">
+    <div class="section-label">Updates</div>
+    <div class="accent-line"></div>
+    <h2>课题组动态</h2>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-date">2026.01</div>
+        <div class="news-text">团队关于全天空反射太阳能反射器的研究被 <strong>Energy &amp; Buildings</strong> (IF 7.1) 接收。</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2025.12</div>
+        <div class="news-text">与广东安捷伦新材料科技有限公司签订 <strong>150 万元</strong>横向技术开发合同，共建校企联合实验室。</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2025.01</div>
+        <div class="news-text"><strong>广东省太阳能光学超材料创新团队</strong>与<strong>东莞市光热辐射物理与技术重点实验室</strong>获批，合计经费 110 万元。</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2024.01</div>
+        <div class="news-text">获批 <strong>国家自然科学基金·面上项目</strong>（54 万元）：仿蓝闪蝶有序/无序结构的高饱和、高亮度、大视域全色系致冷彩色。</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2023.08</div>
+        <div class="news-text">团队关于"低于环境温度的致冷色彩"研究发表于光学顶刊 <strong>Optica</strong> (IF 10.4)，被 <em>New Scientists</em> 等国际媒体亮点报道。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="section-inner reveal">
+    <div class="section-label">Research</div>
+    <div class="accent-line"></div>
+    <h2>研究方向</h2>
+    <div class="research-grid">
+      <div class="r-card">
+        <h3>光热超材料</h3>
+        <p>跨尺度构型设计与多频谱性能调控，实现紫外至微波的全波段光谱剪裁。在 SiO₂/Si₃N₄ 等 ≤3 种材料体系下达成五大功能协同。</p>
+      </div>
+      <div class="r-card">
+        <h3>仿生辐射致冷</h3>
+        <p>基于蝶翅微纳结构仿生，以「构型换组分」路线，无需电力、零能耗实现被动降温 15–40°C，成果发表于 <em>Optica</em> (IF 10.4)。</p>
+      </div>
+      <div class="r-card">
+        <h3>功能薄膜与涂层</h3>
+        <p>面向新能源汽车涂装的致冷功能粉体材料，已进入安捷伦供应链体系，通过比亚迪、特斯拉、蔚来等下游客户推介。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner reveal">
+    <div class="section-label">Grants</div>
+    <div class="accent-line"></div>
+    <h2>科研项目</h2>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="proj-type">国家自然科学基金 · 面上</span>
+        <span style="font-size:0.78rem;color:var(--muted);">2024.01 – 2027.12 · 54 万元 · 在研</span>
+      </div>
+      <h3>仿蓝闪蝶有序/无序结构的高饱和、高亮度、大视域全色系致冷彩色</h3>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="proj-type">国家自然科学基金 · 青年</span>
+        <span style="font-size:0.78rem;color:var(--muted);">2017.01 – 2019.12 · 20 万元 · 已结题</span>
+      </div>
+      <h3>具有蝶翅精细微纳结构的红外响应材料的模拟和实验研究</h3>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="proj-type">广东省教育厅 · 创新团队</span>
+        <span style="font-size:0.78rem;color:var(--muted);">2025.01 – 2027.12 · 60 万元 · 在研</span>
+      </div>
+      <h3>太阳能光学超材料设计及应用创新团队</h3>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="proj-type">东莞市科技局 · 重点实验室</span>
+        <span style="font-size:0.78rem;color:var(--muted);">2025.01 – 2027.12 · 50 万元 · 在研</span>
+      </div>
+      <h3>东莞市光热辐射物理与技术重点实验室</h3>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="proj-type">广东安捷伦 · 横向合作</span>
+        <span style="font-size:0.78rem;color:var(--muted);">2025.12 – 2029.11 · 150 万元 · 在研</span>
+      </div>
+      <h3>先进涂层及高性能聚合材料</h3>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner reveal">
+    <div class="section-label">Achievements</div>
+    <div class="accent-line"></div>
+    <h2>代表性成果</h2>
+    <div class="ach-grid">
+      <div class="ach-card">
+        <div class="ach-num" data-count="34">0</div>
+        <div class="ach-label">SCI 论文</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num" data-count="8">0<span class="unit">+5</span></div>
+        <div class="ach-label">授权发明专利（+5 在审）</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">
+          <span style="font-size:1.8rem;">Optica</span>
+        </div>
+        <div class="ach-label">IF 10.4</div>
+	        <div class="ach-label" style="font-size:0.7rem;color:var(--muted);margin-top:0.3rem;">Featured by New Scientists · Phys.org · Optica Release · Optics &amp; Photonics News</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num" data-count="30">0<span class="unit">°C</span></div>
+        <div class="ach-label">实测最大降温幅度</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num" data-count="5">0</div>
+        <div class="ach-label">行业应用验证</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="section-inner reveal">
+    <div class="section-label">Publications</div>
+    <div class="accent-line"></div>
+    <h2>代表性论著 <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">（共 34 篇 SCI，一作/通讯 19 篇，中科院一区 7 篇）</span></h2>
+    <ol class="pub-list">
+      <li class="pub-item">
+        <span class="title">Substantially simultaneous cooling reduction of buildings and surrounding ground via omnidirectional solar reflectors with full skyward-reflection</span><br>
+        <span class="journal">Jia JH, Yang SH, Zhang Z, et al. <em>Energy &amp; Buildings</em>, 2026, 350: 116654.</span>
+        <span class="pub-tag">IF 7.1</span><span class="pub-tag">二区 TOP</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Structural design and performance evaluation of a high-transparency thermal insulation film suitable for multiple scenarios</span><br>
+        <span class="journal">Zhang Z, Zhang C, Zhao YX, et al. <em>Journal of Materials Chemistry C</em>, 2025, 13: 23493–23506.</span>
+        <span class="pub-tag">IF 5.1</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Recent progress in color-preserving radiative cooling: Multispectral control in visible and infrared wavelength</span><br>
+        <span class="journal">Xing HY, Shu XC, Hong BB, et al. <em>Materials Today Physics</em>, 2023, 38: 101242.</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Cooling colors below the ambient temperature</span>
+        <span class="pub-tag">Featured</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Xing HY, Shu XC, et al. <em>Optica</em>, 2023, 10: 1059.</span>
+        <span class="pub-tag">IF 10.4</span><span class="pub-tag">一区 TOP</span>
+        <span style="font-size:0.72rem;color:var(--muted);"> · Highlighted by <em>New Scientists</em>, <em>Phys.org</em>, <em>Opt. Photon. News</em></span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Achieving structural white inspired from quasi-ordered microstructures in <em>Morpho theseus</em></span><br>
+        <span class="journal">Zhao XK, Xiong YQ, <strong>Wang WL</strong>*, et al. <em>NPG Asia Materials</em>, 2023, 15: 22.</span>
+        <span class="pub-tag">IF 10.8</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Janus Multilayer for Radiative Cooling and Heating in Double-Side Photonic Thermal System</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zou QX, Wang N, et al. <em>ACS Applied Materials &amp; Interfaces</em>, 2021, 13: 42813–42821.</span>
+        <span class="pub-tag">IF 10.4</span><span class="pub-tag">一区 TOP</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">A Bioinspired Switchable Selective Infrared Solar Absorber by Tunable Optical Coupling</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Yan XY, Zou QX, et al. <em>Journal of Materials Chemistry C</em>, 2021, 9: 4150–4157.</span>
+        <span class="pub-tag">IF 8.1</span><span class="pub-tag">Cover</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Self-adaptive radiative cooling and solar heating based on compound metasurface</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zhao ZP*, Zou QX, et al. <em>Journal of Materials Chemistry C</em>, 2020, 8: 3192–3199.</span>
+        <span class="pub-tag">IF 7.1</span><span class="pub-tag">一区 TOP</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">TiO₂ Based Sensor with Butterfly Wing Configurations for Fast Acetone Detection at Room Temperature</span><br>
+        <span class="journal">Yang GQ, Zhang M, Dong DC, et al. <em>Journal of Materials Chemistry C</em>, 2019, 7: 11118–11125.</span>
+        <span class="pub-tag">IF 7.1</span><span class="pub-tag">一区 TOP</span><span class="pub-tag">Cover</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Reversible thermochromic response based on Photonic Crystal structure in Butterfly wing</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zhang W*, Zhang D*, et al. <em>Nanophotonics</em>, 2018, 7: 217–227.</span>
+        <span class="pub-tag">IF 6.0</span><span class="pub-tag">一区 TOP</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Optical Performance Study of Gyroid-Structured TiO₂ Photonic Crystals Replicated from Natural Templates Using a Sol-Gel Method</span><br>
+        <span class="journal">Wu LP#, <strong>Wang WL</strong># (共一), Zhang W*, et al. <em>Advanced Optical Materials</em>, 2018, 6: 1800064.</span>
+        <span class="pub-tag">IF 7.1</span><span class="pub-tag">一区 TOP</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Highly sensitive, reproducible and uniform SERS substrate with 3-dimensional distributed hotspots of high density: gyroid-structured Au periodic metallic materials</span><br>
+        <span class="journal">Wu LP#, <strong>Wang WL</strong># (共一), Zhang W*, et al. <em>NPG Asia Materials</em>, 2018, 10: e462.</span>
+        <span class="pub-tag">IF 8.1</span><span class="pub-tag">一区 TOP</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">A low-cost, high-efficiency light absorption structure inspired from <em>Papilio Ulysses</em> butterfly</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zhang W*, Zhang D*, et al. <em>RSC Advances</em>, 2017, 7: 22749–22756.</span>
+        <span class="pub-tag">IF 3.1</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Omnidirectional light absorption of disordered nano-hole structure inspired from <em>Papilio ulysses</em></span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zhang W, Fang XT, et al. <em>Optics Letters</em>, 2014, 39: 4208–4211.</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Demonstration of higher colour response with ambient refractive index in <em>Papilio blumei</em> as compared to <em>Morpho rhetenor</em></span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zhang W*, Fang XT, et al. <em>Scientific Reports</em>, 2014, 4: 5591.</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Large visual angle microstructure inspired from quantitative design of <em>Morpho</em> butterflies' lamellae deviation using the FDTD/PSO method</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zhang W*, Chen WX, et al. <em>Optics Letters</em>, 2013, 38: 169–171.</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Design of a structure with low incident and viewing angle dependence inspired by <em>Morpho</em> butterflies</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Zhang W*, Gu JJ, et al. <em>Scientific Reports</em>, 2013, 3: 3427.</span>
+      </li>
+      <li class="pub-item">
+        <span class="title">Phase relationships of the Pr–Co–Fe system at 773K</span><br>
+        <span class="journal"><strong>Wang WL</strong>, Lu MW, Feng Q, et al. <em>Journal of Alloys and Compounds</em>, 2011, 509: 6787–6793.</span>
+      </li>
+    </ol>
+    <div class="pub-more">+ 15 篇合作论文（详见 Google Scholar / ResearchGate）</div>
+  </div>
+</section>
+
+<section id="industry">
+  <div class="section-inner reveal">
+    <div class="section-label">Industry</div>
+    <div class="accent-line"></div>
+    <h2>产业转化</h2>
+
+    <div class="ind-card">
+      <div class="logo-placeholder">安</div>
+      <div>
+        <h3>广东安捷伦新材料科技有限公司</h3>
+        <p>签订 <strong>150 万元</strong>技术开发合同，共建校企联合实验室。安捷伦为比亚迪、特斯拉、蔚来、小鹏、吉利等整车厂 Tier-1 供应商，已出具采购意向书与市场渠道承诺函。</p>
+        <div class="tag">新能源汽车涂装</div><div class="tag">150万合同</div><div class="tag">联合实验室</div>
+      </div>
+    </div>
+
+    <div class="ind-card">
+      <div class="logo-placeholder">爱</div>
+      <div>
+        <h3>东莞爱加真空科技有限公司</h3>
+        <p>签订电子束蒸发镀膜机租赁合同，用于多功能光学薄膜制备及粉体前驱体中试生产。设备极限真空 ≤5×10⁻⁴ Pa，最大镀膜幅宽 1.3m。</p>
+        <div class="tag">中试生产</div><div class="tag">镀膜设备</div>
+      </div>
+    </div>
+
+    <div class="ind-card">
+      <div class="logo-placeholder" style="background:linear-gradient(135deg,var(--wing-gold),#a0682a);">光</div>
+      <div>
+        <h3>东莞市光冷科技有限公司</h3>
+        <p>自创企业，聚焦「AI 智冷炫彩功能粉体」的产业化。以高校研发 + 企业联合验证 + 代工生产的轻资产模式，推动辐射致冷涂料在新能源汽车领域的规模化应用。</p>
+        <div class="tag">自研产品</div><div class="tag">粉体涂料</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="section-inner reveal">
+    <div class="section-label">Team</div>
+    <div class="accent-line"></div>
+    <h2>团队</h2>
+
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;color:var(--wing-deep);margin:1.5rem 0 1rem;">在读 / 在站</h3>
+    <div class="ach-grid" style="margin-bottom:1.2rem;">
+      <div class="ach-card">
+        <div class="ach-num">3</div>
+        <div class="ach-label">博士研究生</div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">邢红云 · 李宜泽 · 张哲</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">1</div>
+        <div class="ach-label">硕士研究生</div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">余镇宁</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">2</div>
+        <div class="ach-label">在站博士后</div>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.5;">虞亚敏 · 张世龙</div>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="mem-avatar" style="background:linear-gradient(135deg,var(--wing-teal),#0d7a80);">虞</div>
+      <div class="mem-body">
+        <div class="mem-name">虞亚敏</div>
+        <div class="mem-role">在站博士后 · 中国海洋大学博士</div>
+        <div class="mem-desc">研究方向为无机硅材料设计合成及应用，聚焦刺状纳米二氧化硅的核酸捕获与空气病毒检测。以第一/共一作者发表 SCI 论文 3 篇（含 <em>Chemical Engineering Journal</em> 一区 TOP），申请发明专利 2 项。获国家奖学金。</div>
+        <span class="mem-tag">纳米硅材料</span><span class="mem-tag">病毒检测</span><span class="mem-tag">CEJ 一区</span>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="mem-avatar" style="background:linear-gradient(135deg,var(--wing-gold),#a0682a);">张</div>
+      <div class="mem-body">
+        <div class="mem-name">张世龙</div>
+        <div class="mem-role">在站博士后 · 集美大学博士</div>
+        <div class="mem-desc">研究方向为有机硅树脂设计合成及船舶防污防腐涂料。参与国家级重防腐涂料项目，开发聚环氧基甲基苯基硅氧烷（PEMPS）涂层，附着力 6.88 MPa，防腐性能突出（120d 海水低频阻抗 ~10⁹ Ω·cm²）。以第一作者发表 SCI 论文 2 篇。5 年发电厂工业质检经验。</div>
+        <span class="mem-tag">有机硅树脂</span><span class="mem-tag">防腐涂层</span><span class="mem-tag">重防腐涂料</span>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;color:var(--wing-deep);margin:2rem 0 1rem;">已培养</h3>
+    <div class="ach-grid" style="margin-bottom:1.5rem;">
+      <div class="ach-card">
+        <div class="ach-num">12</div>
+        <div class="ach-label">硕士</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">2</div>
+        <div class="ach-label">博士</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">1</div>
+        <div class="ach-label">已出站博士后</div>
+      </div>
+    </div>
+    <table class="student-table">
+      <thead>
+        <tr><th>姓名</th><th>学历</th><th>届别</th><th>就业单位</th><th>单位性质</th><th>城市</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>杨贵钦</td><td>博士后</td><td>—</td><td>昆明理工大学机电工程学院</td><td>高校（硕导）</td><td>昆明</td></tr>
+        <tr><td>严潇远</td><td>硕士</td><td>2023届</td><td>华为南京研究所</td><td>企业</td><td>南京</td></tr>
+        <tr><td>邹启玄</td><td>硕士</td><td>2021届</td><td>南方电网数字电网科技</td><td>企业</td><td>广州</td></tr>
+        <tr><td>舒啸驰</td><td>硕士</td><td>2023届</td><td>中国民主同盟深圳市委员会</td><td>政府机关</td><td>深圳</td></tr>
+        <tr><td>高毓阳</td><td>硕士</td><td>2023届</td><td>石家庄信息工程职业学院</td><td>高校</td><td>石家庄</td></tr>
+        <tr><td>吉健华</td><td>硕士</td><td>2023届</td><td>华南理工大学</td><td>高校</td><td>广州</td></tr>
+        <tr><td>邢红云</td><td>博士</td><td>2024届</td><td>大湾区大学</td><td>高校</td><td>东莞</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem;">* 名单持续补充中</p>
+  </div>
+</section>
+
+<section id="join">
+  <div class="section-inner reveal">
+    <div class="join-box">
+      <h2>加入课题组</h2>
+      <p>课题组处于快速成长期，经费充足（国自然面上 + 150 万横向 + 省重点实验室），产业转化前景广阔。导师亲自指导实验规划与论文写作，确保每位学生得到充分关注。</p>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);">常年招收具有 <strong>物理、材料、光学工程、高分子、微纳加工</strong> 背景的博士后、博士生及硕士生。</p>
+      <a href="mailto:wangwanlin@gbu.edu.cn" class="btn-light">投递简历至 wangwanlin@gbu.edu.cn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Wang Wanlin · wangwanlin@gbu.edu.cn</p>
+  <p>大湾区大学物质科学学院 · 东莞市光热辐射物理与技术重点实验室</p>
+  <p><a href="https://www.gbu.edu.cn/detail/article/597" target="_blank" rel="noopener" style="color:var(--wing-blue);text-decoration:none;">GBU 教师主页</a> · <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener" style="color:var(--wing-blue);text-decoration:none;">Google Scholar</a></p>
+  <p class="en" style="margin-top:1rem;">Butterfly wings taught us: structure, not pigment, paints the coolest colors.</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Animate number counting
+const numObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.count);
+    if (!target || el.dataset.animated) return;
+    el.dataset.animated = '1';
+    const duration = 1400;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.childNodes[0].textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.ach-num[data-count]').forEach(el => numObserver.observe(el));
+</script>
+</body>
+</html>
